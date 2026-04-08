@@ -5,172 +5,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pengundian Tabungan Arisan - BPR SMS</title>
     <style>
+        /* Animasi Floating Kartu */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Animasi Kilauan Teks */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        /* Animasi Hujan Konfeti */
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #00a8b5;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
-            background-size: 20px 20px;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #008a94; /* Biru gelap sedikit agar elemen cerah lebih pop */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden; /* Mencegah scroll karena animasi */
+            position: relative;
+        }
+
+        /* Layer Konfeti */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            animation: confetti-fall 4s linear infinite;
         }
 
         .card {
             background-color: white;
-            width: 90%;
-            max-width: 420px;
+            width: 340px; 
             border-radius: 25px;
             border: 6px solid #ff9800;
-            padding: 30px;
+            padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1; /* Di atas konfeti */
+            overflow: hidden;
+            animation: floating 4s ease-in-out infinite;
+        }
+
+        /* Pita Pojok */
+        .corner-ribbon {
+            width: 120px;
+            background: #ff4d4d;
+            position: absolute;
+            top: 12px;
+            left: -32px;
+            text-align: center;
+            line-height: 30px;
+            letter-spacing: 1px;
+            color: #f0f0f0;
+            transform: rotate(-45deg);
+            font-size: 9px;
+            font-weight: bold;
+            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            z-index: 2;
         }
 
         .notice {
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 11px;
             font-weight: bold;
             color: #d32f2f;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px dashed #ddd;
-            padding-bottom: 10px;
+            padding: 6px;
+            background: #fff5f5;
+            border-radius: 10px;
+            border: 1px dashed #ff4d4d;
         }
 
-        /* Styling Logo Baru */
         .logo-main {
             width: 100%;
-            max-width: 320px; /* Ukuran proporsional logo memanjang */
+            max-width: 180px;
             height: auto;
-            margin-bottom: 25px;
-        }
-
-        .title-invite {
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .main-event {
             color: #ff4d4d;
             font-weight: 900;
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1.2;
-            margin-bottom: 10px;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        .shine-text {
+            background: linear-gradient(to right, #ff4d4d 0%, #ffd700 50%, #ff4d4d 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 3s linear infinite;
         }
 
         .year-badge {
-            background-color: #ff4d4d;
+            background: linear-gradient(45deg, #ff9800, #ffb74d);
             color: white;
             padding: 6px 20px;
-            border-radius: 12px;
+            border-radius: 50px;
             display: inline-block;
             font-weight: bold;
-            margin-bottom: 25px;
-            font-size: 16px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(255,152,0,0.2);
         }
 
         .details-box {
-            background-color: #ffffff;
-            border-radius: 20px;
-            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 15px;
             text-align: left;
-            margin-bottom: 25px;
-            border: 2px solid #f0f0f0;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+            border: 1px solid #eee;
         }
 
         .detail-item {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
-            font-size: 16px;
-            color: #333;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: #444;
         }
 
-        .detail-item:last-child { margin-bottom: 0; }
-
-        .icon {
+        .circle-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 12px;
+            flex-shrink: 0;
             font-size: 20px;
-            margin-right: 15px;
-            width: 30px;
-            text-align: center;
         }
 
-        .footer-text {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
+        .bg-blue { background-color: #e0f7fa; color: #00838f; }
+        .bg-orange { background-color: #fff3e0; color: #e65100; }
+        .bg-red { background-color: #ffebee; color: #c62828; }
+        .bg-gold { background-color: #fffde7; color: #fbc02d; }
 
         .btn {
-            background-color: #4CAF50;
+            background: linear-gradient(to bottom, #4CAF50, #388E3C);
             color: white;
             text-decoration: none;
-            padding: 18px 30px;
+            padding: 15px;
             border-radius: 15px;
             font-weight: bold;
-            display: block;
-            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
             box-shadow: 0 5px #2e7d32;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            text-transform: uppercase;
         }
 
         .btn:active {
-            box-shadow: none;
-            transform: translateY(4px);
+            box-shadow: 0 2px #2e7d32;
+            transform: translateY(3px);
         }
 
         .small-print {
-            font-size: 11px;
+            font-size: 10px;
             color: #aaa;
-            margin-top: 20px;
-            font-style: italic;
+            margin-top: 15px;
+            line-height: 1.3;
         }
     </style>
 </head>
 <body>
 
+    <div class="confetti-container" id="confetti"></div>
+
     <div class="card">
-        <div class="notice">⚠️ Undangan berlaku untuk 1 orang</div>
+        <div class="corner-ribbon">CLOSING</div>
+        
+        <div class="notice">
+            <span>⭐ Khusus Nasabah Arisan ⭐</span>
+        </div>
 
-        <img src="BPR SMS.png" alt="Logo PT. Bank Perkreditan Rakyat Sinar Mitra Sejahtera" class="logo-main">
+        <img src="BPR SMS.png" alt="Logo BPR SMS" class="logo-main">
 
-        <div class="title-invite">Kami mengundang Anda</div>
-        <div class="main-event">PENGUNDIAN TABUNGAN<br>ARISAN PERIODE 4</div>
+        <div class="main-event">
+            <span class="shine-text">GRAND PRIZE</span><br>
+            ARISAN PERIODE 4
+        </div>
         <div class="year-badge">TAHUN 2026</div>
 
         <div class="details-box">
             <div class="detail-item">
-                <span class="icon">📅</span>
+                <div class="circle-icon bg-blue">📅</div>
                 <span><strong>Sabtu, 09 Mei 2026</strong></span>
             </div>
+            
             <div class="detail-item">
-                <span class="icon">⏰</span>
+                <div class="circle-icon bg-orange">⏰</div>
                 <span>11.00 WIB - Selesai</span>
             </div>
+            
             <div class="detail-item">
-                <span class="icon">📍</span>
+                <div class="circle-icon bg-red">📍</div>
                 <span>Kampung Laut, Semarang</span>
+            </div>
+            
+            <div class="detail-item">
+                <div class="circle-icon bg-gold">🏆</div>
+                <span style="color: #b8860b; font-weight: 900; font-size: 12px;">PENGUNDIAN HADIAH UTAMA</span>
             </div>
         </div>
 
-        <div class="footer-text">
-            Mohon konfirmasi kehadiran Anda melalui tombol Google Form di bawah ini:
-        </div>
-
-        <a href="URL_GOOGLE_FORM_ANDA" class="btn">SAYA AKAN HADIR ✍️</a>
+        <a href="URL_GOOGLE_FORM_ANDA" class="btn">
+            <span>KONFIRMASI HADIR 📝</span>
+        </a>
 
         <div class="small-print">
-            *Data konfirmasi akan otomatis terekap di sistem kami.
+            Terima kasih atas kepercayaan Anda menabung bersama PT. BPR Sinar Mitra Sejahtera.
         </div>
     </div>
 
+    <script>
+        // Script sederhana untuk membuat potongan konfeti secara acak
+        const container = document.getElementById('confetti');
+        const colors = ['#FFD700', '#FF4D4D', '#FFFFFF', '#00BCD4', '#4CAF50', '#FF9800'];
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 4 + 's';
+            confetti.style.opacity = Math.random();
+            container.appendChild(confetti);
+        }
+    </script>
 </body>
 </html>
