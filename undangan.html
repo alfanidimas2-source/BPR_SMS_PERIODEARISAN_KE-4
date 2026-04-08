@@ -33,15 +33,34 @@
 
         body {
             margin: 0;
-            padding: 0;
+            padding: 40px 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: #008a94; 
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden; 
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
+        }
+
+        /* --- HIASAN BUNGA --- */
+        .flower {
+            position: fixed;
+            width: 150px;
+            height: auto;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        .top-left { top: -20px; left: -20px; transform: rotate(90deg); }
+        .top-right { top: -20px; right: -20px; transform: rotate(180deg); }
+        .bottom-left { bottom: -20px; left: -20px; transform: rotate(0deg); }
+        .bottom-right { bottom: -20px; right: -20px; transform: rotate(-90deg); }
+
+        @media (max-width: 600px) {
+            .flower { width: 100px; opacity: 0.6; }
         }
 
         .confetti-container {
@@ -62,8 +81,9 @@
         }
 
         .card {
-            background-color: white;
-            width: 340px; 
+            background-color: #fffaf0; 
+            width: 90%;
+            max-width: 340px; 
             border-radius: 25px;
             border: 6px solid #ff9800;
             padding: 30px 20px;
@@ -72,7 +92,6 @@
             box-sizing: border-box;
             position: relative;
             z-index: 1;
-            overflow: hidden;
             animation: floating 4s ease-in-out infinite;
         }
 
@@ -104,12 +123,12 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             padding: 6px;
-            background: #fff5f5;
+            background: #fff0f0;
             border-radius: 10px;
             border: 1px dashed #ff4d4d;
         }
 
-        .logo-main {
+        .logo-bpr {
             width: 100%;
             max-width: 180px;
             height: auto;
@@ -146,12 +165,12 @@
         }
 
         .details-box {
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             border-radius: 15px;
             padding: 15px;
             text-align: left;
             margin-bottom: 20px;
-            border: 1px solid #eee;
+            border: 1px solid #ffe0b2;
         }
 
         .detail-item {
@@ -159,7 +178,7 @@
             align-items: center;
             margin-bottom: 14px;
             font-size: 13px;
-            color: #444;
+            color: #333;
         }
 
         .circle-icon {
@@ -175,7 +194,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Kelas Animasi Ikon */
         .animated-icon {
             animation: iconPulse 2s infinite ease-in-out;
             display: inline-block;
@@ -185,6 +203,16 @@
         .bg-orange { background-color: #fff3e0; }
         .bg-red { background-color: #ffebee; }
         .bg-gold { background-color: #fffde7; border: 1px solid #ffe082; }
+        .bg-info { background-color: #fff9c4; border: 1px solid #fbc02d; }
+
+        .instruction-text {
+            font-size: 11px;
+            color: #444;
+            margin-bottom: 12px;
+            font-weight: bold;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
 
         .btn {
             background: linear-gradient(to bottom, #4CAF50, #388E3C);
@@ -210,13 +238,18 @@
 
         .small-print {
             font-size: 9px;
-            color: #aaa;
+            color: #888;
             margin-top: 15px;
             line-height: 1.3;
         }
     </style>
 </head>
 <body>
+
+    <img src="https://i.ibb.co/vYm6p6n/flower-corner.png" class="flower top-left" alt="hiasan">
+    <img src="https://i.ibb.co/vYm6p6n/flower-corner.png" class="flower top-right" alt="hiasan">
+    <img src="https://i.ibb.co/vYm6p6n/flower-corner.png" class="flower bottom-left" alt="hiasan">
+    <img src="https://i.ibb.co/vYm6p6n/flower-corner.png" class="flower bottom-right" alt="hiasan">
 
     <div class="confetti-container" id="confetti-wrap"></div>
 
@@ -227,10 +260,10 @@
             <span>✨ KHUSUS NASABAH ARISAN ✨</span>
         </div>
 
-        <img src="BPR SMS.png" alt="Logo BPR SMS" class="logo-main">
+        <img src="logo bpr.png" alt="Logo BPR SMS" class="logo-bpr">
 
         <div class="main-event">
-            <span class="shine-text">GRAND PRIZE</span><br>
+            <span class="shine-text">PENUTUPAN</span><br>
             ARISAN PERIODE 4
         </div>
         <div class="year-badge">TAHUN 2026</div>
@@ -240,32 +273,45 @@
                 <div class="circle-icon bg-blue">
                     <span class="animated-icon">📅</span>
                 </div>
-                <span><strong>Sabtu, 09 Mei 2026</strong></span>
+                <span><strong>SABTU, 09 MEI 2026</strong></span>
             </div>
             
             <div class="detail-item">
                 <div class="circle-icon bg-orange">
                     <span class="animated-icon" style="animation-delay: 0.5s;">⏰</span>
                 </div>
-                <span>11.00 WIB - Selesai</span>
+                <span><strong>11.00 WIB - SELESAI</strong></span>
             </div>
             
             <div class="detail-item">
                 <div class="circle-icon bg-red">
                     <span class="animated-icon" style="animation-delay: 1s;">📍</span>
                 </div>
-                <span>Kampung Laut, Semarang</span>
+                <span><strong>KAMPUNG LAUT, SEMARANG</strong></span>
             </div>
+
+            <div class="detail-item">
+                <div class="circle-icon bg-info">
+                    <span class="animated-icon" style="animation-delay: 1.5s;">⚠️</span>
+                </div>
+                <span style="font-size: 12px; color: #d32f2f;"><strong>UNDANGAN BERLAKU UNTUK 1 (SATU) ORANG</strong></span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #ffe0b2; margin: 10px 0;">
             
             <div class="detail-item">
                 <div class="circle-icon bg-gold">
-                    <span class="animated-icon" style="animation-delay: 1.5s;">🏆</span>
+                    <span class="animated-icon" style="animation-delay: 2s;">🏆</span>
                 </div>
-                <span style="color: #b8860b; font-weight: 900; font-size: 12px; letter-spacing: 0.5px;">PENGUNDIAN HADIAH UTAMA</span>
+                <span style="color: #b8860b; font-weight: 900; font-size: 12px; letter-spacing: 0.5px;"><strong>PENGUNDIAN HADIAH UTAMA</strong></span>
             </div>
         </div>
 
-        <a href="URL_GOOGLE_FORM_ANDA" class="btn">
+        <div class="instruction-text">
+            Klik tombol di bawah untuk konfirmasi kehadiran Anda melalui Google Form:
+        </div>
+
+        <a href="https://forms.gle/LffZrL3XDcMYwdRk7" class="btn">
             <span>SAYA AKAN HADIR ✍️</span>
         </a>
 
@@ -280,7 +326,7 @@
         const shapes = ['50%', '0%'];
 
         function createConfetti() {
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 60; i++) {
                 const conf = document.createElement('div');
                 conf.className = 'confetti';
                 conf.style.left = Math.random() * 100 + 'vw';
@@ -294,7 +340,7 @@
                 conf.style.animationDelay = delay;
                 conf.style.opacity = Math.random();
                 
-                const size = (Math.random() * 10 + 5) + 'px';
+                const size = (Math.random() * 8 + 4) + 'px';
                 conf.style.width = size;
                 conf.style.height = size;
 
