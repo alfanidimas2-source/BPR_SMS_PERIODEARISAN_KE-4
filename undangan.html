@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pengundian Tabungan Arisan - BPR SMS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #00a8b5;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background-color: white;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 25px;
+            border: 6px solid #ff9800;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .notice {
+            font-size: 13px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Styling Logo Baru */
+        .logo-main {
+            width: 100%;
+            max-width: 320px; /* Ukuran proporsional logo memanjang */
+            height: auto;
+            margin-bottom: 25px;
+        }
+
+        .title-invite {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .main-event {
+            color: #ff4d4d;
+            font-weight: 900;
+            font-size: 22px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .year-badge {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: bold;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .details-box {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 25px;
+            border: 2px solid #f0f0f0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .detail-item:last-child { margin-bottom: 0; }
+
+        .icon {
+            font-size: 20px;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: block;
+            font-size: 18px;
+            box-shadow: 0 5px #2e7d32;
+            transition: all 0.2s ease;
+        }
+
+        .btn:active {
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+
+        .small-print {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="notice">?? Undangan berlaku untuk 1 orang</div>
+
+        <img src="BPR_SMS.png" alt="Logo PT. Bank Perkreditan Rakyat Sinar Mitra Sejahtera" class="logo-main">
+
+        <div class="title-invite">Kami mengundang Anda</div>
+        <div class="main-event">PENGUNDIAN TABUNGAN<br>ARISAN PERIODE 4</div>
+        <div class="year-badge">TAHUN 2026</div>
+
+        <div class="details-box">
+            <div class="detail-item">
+                <span class="icon">??</span>
+                <span><strong>Sabtu, 09 Mei 2026</strong></span>
+            </div>
+            <div class="detail-item">
+                <span class="icon">?</span>
+                <span>11.00 WIB - Selesai</span>
+            </div>
+            <div class="detail-item">
+                <span class="icon">??</span>
+                <span>Kampung Laut, Semarang</span>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            Mohon konfirmasi kehadiran Anda melalui tombol Google Form di bawah ini:
+        </div>
+
+        <a href="URL_GOOGLE_FORM_ANDA" class="btn">SAYA AKAN HADIR ??</a>
+
+        <div class="small-print">
+            *Data konfirmasi akan otomatis terekap di sistem kami.
+        </div>
+    </div>
+
+</body>
+</html>
