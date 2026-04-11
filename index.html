@@ -31,6 +31,14 @@
             100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
+        /* Animasi Hadiah Berjatuhan */
+        @keyframes gift-fall {
+            0% { transform: translateY(-30vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(120vh) rotate(360deg); opacity: 0; }
+        }
+
         body {
             margin: 0;
             padding: 40px 0;
@@ -59,18 +67,14 @@
         .bottom-left { bottom: -20px; left: -20px; transform: rotate(0deg); }
         .bottom-right { bottom: -20px; right: -20px; transform: rotate(-90deg); }
 
-        @media (max-width: 600px) {
-            .flower { width: 100px; opacity: 0.6; }
-        }
-
-        .confetti-container {
-            position: absolute;
+        .confetti-container, .gifts-container {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1; /* Di atas bunga tapi di bawah kartu */
         }
 
         .confetti {
@@ -80,36 +84,58 @@
             animation: confetti-fall 4s linear infinite;
         }
 
+        /* --- GAYA HADIAH BERJATUHAN (UKURAN DIPERBESAR) --- */
+        .falling-gift {
+            position: absolute;
+            /* Ukuran dasar diperbesar, akan diacak lagi via JS */
+            width: 120px; 
+            height: auto;
+            animation: gift-fall linear infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            z-index: 1; /* Pastikan di bawah kartu */
+        }
+
         .card {
-            background-color: #fffaf0; 
+            background-color: #FFF9E3; 
             width: 90%;
             max-width: 340px; 
             border-radius: 25px;
-            border: 6px solid #ff9800;
+            border: 6px solid #4DD0E1; 
             padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(255, 152, 0, 0.4), 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 0 20px rgba(77, 208, 225, 0.4), 0 15px 40px rgba(0,0,0,0.4);
             box-sizing: border-box;
             position: relative;
-            z-index: 1;
+            z-index: 10; /* Kartu berada di paling atas */
             animation: floating 4s ease-in-out infinite;
+            overflow: hidden; 
         }
 
         .corner-ribbon {
             width: 120px;
             background: #ff4d4d;
             position: absolute;
-            top: 12px;
+            top: 15px;
             left: -32px;
             text-align: center;
             line-height: 30px;
             letter-spacing: 1px;
-            color: #f0f0f0;
+            color: #ffffff;
             transform: rotate(-45deg);
-            font-size: 9px;
-            font-weight: bold;
-            box-shadow: 0 0 3px rgba(0,0,0,0.3);
-            z-index: 2;
+            font-size: 10px;
+            font-weight: 900;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 11;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .header-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff4d4d;
+            margin-bottom: 5px;
+            letter-spacing: 1.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .notice {
@@ -139,7 +165,7 @@
             color: #ff4d4d;
             font-weight: 900;
             font-size: 20px;
-            line-height: 1.2;
+            line-height: 1.4;
             margin: 10px 0;
             text-transform: uppercase;
         }
@@ -153,7 +179,7 @@
         }
 
         .year-badge {
-            background: linear-gradient(45deg, #ff9800, #ffb74d);
+            background: linear-gradient(45deg, #00BCD4, #4DD0E1);
             color: white;
             padding: 6px 20px;
             border-radius: 50px;
@@ -161,7 +187,7 @@
             font-weight: bold;
             font-size: 14px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(255,152,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,188,212,0.2);
         }
 
         .details-box {
@@ -200,19 +226,10 @@
         }
 
         .bg-blue { background-color: #e0f7fa; }
-        .bg-orange { background-color: #fff3e0; }
+        .bg-orange-new { background-color: #E1F5FE; }
         .bg-red { background-color: #ffebee; }
         .bg-gold { background-color: #fffde7; border: 1px solid #ffe082; }
         .bg-info { background-color: #fff9c4; border: 1px solid #fbc02d; }
-
-        .instruction-text {
-            font-size: 11px;
-            color: #444;
-            margin-bottom: 12px;
-            font-weight: bold;
-            line-height: 1.4;
-            padding: 0 10px;
-        }
 
         .btn {
             background: linear-gradient(to bottom, #4CAF50, #388E3C);
@@ -252,9 +269,12 @@
     <img src="https://i.ibb.co/vYm6p6n/flower-corner.png" class="flower bottom-right" alt="hiasan">
 
     <div class="confetti-container" id="confetti-wrap"></div>
+    <div class="gifts-container" id="gifts-wrap"></div>
 
     <div class="card">
         <div class="corner-ribbon">CLOSING</div>
+        
+        <div class="header-title">PENGUNDIAN</div>
         
         <div class="notice">
             <span>✨ KHUSUS NASABAH ARISAN ✨</span>
@@ -266,6 +286,7 @@
             <span class="shine-text">PENUTUPAN DAN PENGUNDIAN</span><br>
             ARISAN PERIODE 4
         </div>
+        
         <div class="year-badge">TAHUN 2026</div>
 
         <div class="details-box">
@@ -277,7 +298,7 @@
             </div>
             
             <div class="detail-item">
-                <div class="circle-icon bg-orange">
+                <div class="circle-icon bg-orange-new">
                     <span class="animated-icon" style="animation-delay: 0.5s;">⏰</span>
                 </div>
                 <span><strong>11.00 WIB - SELESAI</strong></span>
@@ -307,11 +328,7 @@
             </div>
         </div>
 
-        <div class="instruction-text">
-            Klik tombol di bawah untuk konfirmasi kehadiran Anda melalui Google Form:
-        </div>
-
-        <a href="https://forms.gle/LffZrL3XDcMYwdRk7" class="btn">
+        <a href="https://forms.gle/LffZrL3XDcMYwdRk7" class="btn" target="_blank">
             <span>SAYA AKAN HADIR ✍️</span>
         </a>
 
@@ -321,33 +338,58 @@
     </div>
 
     <script>
-        const container = document.getElementById('confetti-wrap');
+        const confContainer = document.getElementById('confetti-wrap');
         const colors = ['#FFD700', '#FF4D4D', '#FFFFFF', '#00BCD4', '#FF9800', '#4CAF50'];
-        const shapes = ['50%', '0%'];
 
         function createConfetti() {
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 30; i++) {
                 const conf = document.createElement('div');
                 conf.className = 'confetti';
                 conf.style.left = Math.random() * 100 + 'vw';
                 conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                conf.style.borderRadius = shapes[Math.floor(Math.random() * shapes.length)];
-                
-                const duration = (Math.random() * 3 + 2) + 's';
-                const delay = (Math.random() * 5) + 's';
-                
-                conf.style.animationDuration = duration;
-                conf.style.animationDelay = delay;
-                conf.style.opacity = Math.random();
-                
-                const size = (Math.random() * 8 + 4) + 'px';
-                conf.style.width = size;
-                conf.style.height = size;
-
-                container.appendChild(conf);
+                conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+                conf.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                conf.style.animationDelay = (Math.random() * 5) + 's';
+                conf.style.width = (Math.random() * 8 + 4) + 'px';
+                conf.style.height = conf.style.width;
+                confContainer.appendChild(conf);
             }
         }
+
+        const giftContainer = document.getElementById('gifts-wrap');
+        const giftImages = [
+            'kipas_angin-removebg-preview.png',
+            'Blender-removebg-preview.png',
+            'setrika-removebg-preview.png',
+            'Sepeda_listrik-removebg-preview.png',
+            'Kulkas-removebg-preview.png',
+            'mesin_cuci-removebg-preview.png',
+            'Magicom-removebg-preview.png',
+            'Sepeda_Montor-removebg-preview.png'
+        ];
+
+        function createFallingGifts() {
+            for (let i = 0; i < 8; i++) {
+                const gift = document.createElement('img');
+                gift.src = giftImages[i % giftImages.length];
+                gift.className = 'falling-gift';
+                
+                let randomLeft = Math.random() * 80;
+                gift.style.left = randomLeft + 'vw';
+                
+                gift.style.animationDuration = (Math.random() * 4 + 6) + 's'; 
+                gift.style.animationDelay = (Math.random() * 8) + 's';
+                
+                // UKURAN LEBIH BESAR (110px - 170px)
+                const bigSize = (Math.floor(Math.random() * 60) + 110) + 'px';
+                gift.style.width = bigSize;
+                
+                giftContainer.appendChild(gift);
+            }
+        }
+
         createConfetti();
+        createFallingGifts();
     </script>
 </body>
 </html>
